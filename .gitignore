@@ -1,0 +1,9 @@
+.idea
+.vscode
+
+node_modules
+
+yarn-error.log
+
+# FiveM thing
+.yarn.installed
