@@ -1,20 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
+import { ClientUtilSettings, ClientUtilsParams, NuiCallbackFunc, RPCListenerCb } from "../types";
 
-interface ClientUtilSettings {
-  promiseTimeout: number;
-  debugMode: boolean;
-}
 
-interface ClientUtilsParams {
-  promiseTimout?: number;
-  debugMode?: boolean;
-}
-
-export type NuiCallbackFunc = (val: any) => void;
-
-type RPCListenerCb<T, R> = (data: T) => R;
-
-export default class ClientUtils {
+export class ClientUtils {
   private _settings: ClientUtilSettings = {
     promiseTimeout: 15000,
     debugMode: false,
@@ -30,6 +18,10 @@ export default class ClientUtils {
     console.log(`^1[ClUtils]^0`, ...args);
   }
 
+  /**
+   * Change the settings for this instance by passing a new config
+   * @param settings - Settings you wish to overwrite
+   **/
   public setSettings(settings?: ClientUtilsParams): void {
     this._settings = {
       ...this._settings,
@@ -37,6 +29,12 @@ export default class ClientUtils {
     };
   }
 
+  /**
+   * Emit a promisified event towards the server which will resolve
+   * once the server responds.
+   * @param eventName - The event name
+   * @param data - The data you wish to send with the request
+   **/
   public emitNetPromise<T = any>(eventName: string, data: unknown): Promise<T> {
     return new Promise((resolve, reject) => {
       let hasTimedOut = false;
@@ -62,9 +60,11 @@ export default class ClientUtils {
   }
 
   /**
-   *  Will Register an NUI event listener that will immediately
-   *  proxy to a server side event of the same name and wait
-   *  for the response.
+   *  Will Register an NUI event callback that will immediately
+   *  proxy to a server side promisified event of the same name. Once
+   *  the server responds and resolves the promise on the client, this function will
+   *  callback to the NUI and resolve the original HTTP request.
+   *
    *  @param event - The event name to listen for
    */
   public registerNuiProxy(event: string): void {
@@ -83,7 +83,8 @@ export default class ClientUtils {
   }
 
   /**
-   * Register a client side RPC listener with a callback fn containing logic
+   * Register a listener for the RPC system which can then be triggered by the server side RPC call.
+   *
    * @param eventName - The event name to listen for
    * @param cb - The callback function that returns the desired value back to the server
    **/

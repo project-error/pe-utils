@@ -1,27 +1,16 @@
-import { ServerErrorCodes, ServerStatus } from "../misc/constants";
+import { ServerErrorCodes, ServerStatus } from "../misc";
 import { v4 as uuidv4 } from "uuid";
 
-export interface PromiseRequest<T = any> {
-  data: T;
-  source: number;
-}
+import {
+  CBSignature,
+  PromiseEventResp,
+  PromiseRequest,
+  ServerPromiseResp,
+  ServerUtilSettings
+} from "../types";
 
-export interface ServerPromiseResp<T = undefined> {
-  errorMsg?: ServerErrorCodes;
-  status: "ok" | "error";
-  data?: T;
-}
 
-interface ServerUtilSettings {
-  debugMode: boolean;
-  rpcTimeout: number;
-}
-
-export type PromiseEventResp<T> = (returnData: ServerPromiseResp<T>) => void;
-
-export type CBSignature<T, P> = (reqObj: PromiseRequest<T>, resp: PromiseEventResp<P>) => void;
-
-export default class ServerUtils {
+export class ServerUtils {
   private readonly _utilSettings: ServerUtilSettings = {
     debugMode: false,
     rpcTimeout: 10000,
@@ -36,6 +25,11 @@ export default class ServerUtils {
     console.log(`^3[SvUtils]^1`, ...args);
   }
 
+  /**
+   * The method used whenever handling a promisified event sent by the Client Utils instance
+   * @param eventName The event name to listen for
+   * @param cb A callback function that takes the req and resp objects as its arguments
+   **/
   public onNetPromise<T = any, P = any>(eventName: string, cb: CBSignature<T, P>): void {
     onNet(eventName, (respEventName: string, data: T) => {
       const src = global.source;
@@ -61,7 +55,13 @@ export default class ServerUtils {
       });
     });
   }
-
+  /**
+   * For calling RPC events registered on the client. RPC events will trigger on the client and
+   * return client data which is dependent on the logic of the RPC callback.
+   * @param eventName The event name to trigger
+   * @param src The source of the player to call the RPC event on
+   * @param data Any data you wish to pass to the client during this RPC request
+   **/
   public callClientRPC<T = any>(
     eventName: string,
     src: number | string,

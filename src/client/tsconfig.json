@@ -1,20 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "*": ["types/*"]
-    },
-    "outDir": "./",
-    "strict": true,
-    "module": "commonjs",
-    "target": "es6",
-    "allowJs": true,
-    "lib": ["es2017"],
+    "lib": ["es2017", "DOM"],
     "types": ["@citizenfx/client", "@types/node"],
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "esModuleInterop": true
   },
+  "extends": "../../tsconfig.json",
   "include": ["./**/*"],
-  "exclude": ["**/node_modules", "**/__tests__/*"]
 }
