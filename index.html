@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@project-error/pe-utils</title>
+	<meta name="description" content="Documentation for @project-error/pe-utils">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@project-error/pe-utils</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@project-error/pe-utils</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<img align="center">
+				<img href="https://projecterror.dev/" rel="noopener" target="_blank"><img width="150" src="https://i.tasoagc.dev/c1pD" alt="Material-UI logo">
+				</p>
+				<h1 align="center">Project Error Utilities</h1>
+				<div align="center">
+					A collection of useful utilities for the v8 ScRT within the CFX platform.
+				</div>
+				<div align="center">
+					<p><a href="https://github.com/project-error/pe-utils/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license"></a>
+						<a href="https://www.npmjs.com/package/@project-error/pe-utils"><img src="https://img.shields.io/npm/v/@project-error/pe-utils/latest.svg" alt="npm next package"></a>
+						<img src="https://img.shields.io/discord/791854454760013827?label=Our%20Discord" alt="Discord">
+						<img src="https://img.shields.io/david/project-error/pe-utils" alt="David">
+					<a href="https://dependabot.com"><img src="https://api.dependabot.com/badges/status?host=github&repo=project-error/pe-utils" alt="Dependabot Status"></a></p>
+				</div>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p>This package is available as an <a href="https://www.npmjs.com/package/@project-error/pe-utils">npm package</a>.</p>
+				<pre><code class="language-sh"><span style="color: #008000"># npm installation</span>
+<span style="color: #000000">npm install @project-error/pe-utils</span>
+
+<span style="color: #008000"># yarn installation</span>
+<span style="color: #000000">yarn add @project-error/pe-utils</span>
+</code></pre>
+				<p>⚠️Note: This project is currently in active development and may be unstable for the forseeable
+				future</p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Promisified net events</li>
+					<li>RPC system allowing for remote client calls from the server</li>
+					<li>TypeScript wrapped natives allowing for more fluid static typing through generics</li>
+					<li>NUI Proxy system that allows for NUI to fetch server side data without breaking the HTTP
+					request</li>
+					<li>TypeScript first with declarations generated from source (vanilla JavaScript is still compatible)</li>
+					<li>General wrappers to make development easier within the runtime</li>
+				</ul>
+				<a href="#official-examples" id="official-examples" style="color: inherit; text-decoration: none;">
+					<h2>Official Examples</h2>
+				</a>
+				<p>You can find official examples at <a href="https://github.com/project-error/pe-utils-examples">this GitHub Repo</a>. These
+				are both in TypeScript as well as regular JavaScript</p>
+				<a href="#function-documentation" id="function-documentation" style="color: inherit; text-decoration: none;">
+					<h2>Function Documentation</h2>
+				</a>
+				<p>Inline documentations is also included for almost all of the current functions
+				&amp; methods.</p>
+				<a href="#promisified-net-events" id="promisified-net-events" style="color: inherit; text-decoration: none;">
+					<h3>Promisified Net Events</h3>
+				</a>
+				<p>This package adds the ability to utilize promisified net events. Essentially a small promise
+					wrapper around events. When using this system it is wise to keep in mind that events
+					are transmitted over UDP and <strong>not</strong> TCP, this can lead to issues if a player has
+					poor internet speeds. There is a default timeout of 15 seconds which can be lowered or
+				raised.</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-ts"><span style="color: #008000">// Client Side</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span>
+<span style="color: #000000">  </span><span style="color: #001080">ClientUtils</span><span style="color: #000000">, </span>
+<span style="color: #000000">  </span><span style="color: #001080">RegisterNuiCB</span><span style="color: #000000">, </span>
+<span style="color: #000000">  </span><span style="color: #001080">PromiseEventResp</span><span style="color: #000000"> </span>
+<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@project-error/pe-utils&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">ServerResponseData</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">data1</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">data2</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">data3</span><span style="color: #000000">: </span><span style="color: #267F99">number</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clUtils</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ClientUtils</span><span style="color: #000000">()</span>
+
+<span style="color: #008000">// NUI Callback wrapped for v8</span>
+<span style="color: #795E26">RegisterNuiCB</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;someCallbackEvent&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">data</span><span style="color: #000000">: </span><span style="color: #267F99">unknown</span><span style="color: #000000">, </span><span style="color: #795E26">cb</span><span style="color: #000000">: (</span><span style="color: #001080">any</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #267F99">void</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">try</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">serverResp</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">clUtils</span><span style="color: #000000">.</span><span style="color: #795E26">emitNetPromise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">PromiseEventResp</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ServerResponseData</span><span style="color: #000000">&gt;&gt;(</span><span style="color: #A31515">&#039;fetchEvent&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #795E26">cb</span><span style="color: #000000">(</span><span style="color: #001080">serverResp</span><span style="color: #000000">)</span>
+<span style="color: #000000">  } </span><span style="color: #AF00DB">catch</span><span style="color: #000000"> (</span><span style="color: #001080">e</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">`Error encountered: </span><span style="color: #0000FF">${</span><span style="color: #001080">e</span><span style="color: #000000FF">.</span><span style="color: #001080">message</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">)</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<pre><code class="language-ts"><span style="color: #008000">// Server Side</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">ServerUtils</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./sv_utils&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">ServerPromiseResp</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./sv_utils.types&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">IncomingData</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">thing1</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">  </span><span style="color: #001080">thing2</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">ReturnData</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">respData1</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">;</span>
+<span style="color: #000000">  </span><span style="color: #001080">respData2</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">svUtils</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ServerUtils</span><span style="color: #000000">()</span>
+
+<span style="color: #001080">svUtils</span><span style="color: #000000">.</span><span style="color: #795E26">onNetPromise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">RequestData</span><span style="color: #000000">, </span><span style="color: #267F99">ServerPromiseResp</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ReturnData</span><span style="color: #000000">&gt;&gt;(</span><span style="color: #A31515">&#039;fetchEvent&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">req</span><span style="color: #000000">, </span><span style="color: #001080">resp</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">playerSrc</span><span style="color: #000000"> = </span><span style="color: #001080">req</span><span style="color: #000000">.</span><span style="color: #001080">source</span>
+<span style="color: #000000">  </span>
+
+<span style="color: #000000">  </span><span style="color: #008000">// Do some logic to get resp data on the server</span>
+
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">respObj</span><span style="color: #000000">: </span><span style="color: #267F99">ServerPromiseResp</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ReturnData</span><span style="color: #000000">&gt; = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">status:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ok&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">respData1:</span><span style="color: #000000"> </span><span style="color: #098658">12345</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">respData2:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;adadsadasda&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">  </span><span style="color: #008000">// Sent back to the client to resolve</span>
+<span style="color: #000000">  </span><span style="color: #795E26">resp</span><span style="color: #000000">(</span><span style="color: #001080">respObj</span><span style="color: #000000">)</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<a href="#rpc-system" id="rpc-system" style="color: inherit; text-decoration: none;">
+					<h3>RPC System</h3>
+				</a>
+				<pre><code class="language-ts"><span style="color: #008000">// Client Side</span>
+<span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">ServerDataObj</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">coolStuff</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">  </span><span style="color: #001080">amICool</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #001080">clientUtils</span><span style="color: #000000">.</span><span style="color: #795E26">registerRPCListener</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ServerDataObj</span><span style="color: #000000">&gt;(</span><span style="color: #A31515">&#039;niceEvent&#039;</span><span style="color: #000000">, </span><span style="color: #001080">data</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">playerPed</span><span style="color: #000000"> = </span><span style="color: #795E26">PlayerPedId</span><span style="color: #000000">();</span>
+<span style="color: #000000">  </span><span style="color: #008000">// This is the optional data sent by the server, you can</span>
+<span style="color: #000000">  </span><span style="color: #008000">// use it for logic if needed</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">dir</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">);</span>
+
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> [</span><span style="color: #0070C1">x</span><span style="color: #000000">, </span><span style="color: #0070C1">y</span><span style="color: #000000">, </span><span style="color: #0070C1">z</span><span style="color: #000000">] = </span><span style="color: #795E26">GetEntityCoords</span><span style="color: #000000">(</span><span style="color: #001080">playerPed</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #008000">// We return an object here to the server with x, y, z</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { </span><span style="color: #001080">x</span><span style="color: #000000">, </span><span style="color: #001080">y</span><span style="color: #000000">, </span><span style="color: #001080">z</span><span style="color: #000000"> };</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<pre><code class="language-ts"><span style="color: #008000">// Server Side</span>
+<span style="color: #795E26">RegisterCommand</span><span style="color: #000000">(</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;debugTest&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">src</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">try</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #008000">// Lets call our RPC and print the result. This is a promise, so we must await</span>
+<span style="color: #000000">      </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">coordObj</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">svUtils</span><span style="color: #000000">.</span><span style="color: #795E26">callClientRPC</span><span style="color: #000000">&lt;</span><span style="color: #267F99">Vector3</span><span style="color: #000000">&gt;(</span><span style="color: #A31515">&#039;niceEvent&#039;</span><span style="color: #000000">, </span><span style="color: #001080">src</span><span style="color: #000000">, {</span>
+<span style="color: #000000">        </span><span style="color: #001080">coolStuff:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;adadadada&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">amICool:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">      });</span>
+
+<span style="color: #000000">      </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Returned data:&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">      </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">dir</span><span style="color: #000000">(</span><span style="color: #001080">coordObj</span><span style="color: #000000">);</span>
+<span style="color: #000000">    } </span><span style="color: #AF00DB">catch</span><span style="color: #000000"> (</span><span style="color: #001080">e</span><span style="color: #000000">) {</span>
+<span style="color: #000000">      </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">e</span><span style="color: #000000">);</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">);</span>
+</code></pre>
+				<p><strong>TODO: Further Explanations</strong></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/client.html">client</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/misc.html">misc</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/server.html">server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types.html">types</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
