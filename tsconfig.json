@@ -14,17 +14,11 @@
   },
   "references": [
     {
-      "path": "src/client"
+      "path": "./src/client/tsconfig.json"
     },
     {
-      "path": "src/server"
+      "path": "./src/server/tsconfig.json"
     },
-    {
-      "path": "src/misc"
-    },
-    {
-      "path": "src/types"
-    }
   ],
   "files": [],
   "exclude": ["node_modules"]

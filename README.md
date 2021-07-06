@@ -1,5 +1,5 @@
-<p align="center">
-  <a href="https://projecterror.dev/" rel="noopener" target="_blank"><img width="150" src="https://i.tasoagc.dev/c1pD" alt="Material-UI logo"></a></p>
+<img align="center">
+  <img href="https://projecterror.dev/" rel="noopener" target="_blank"><img width="150" src="https://i.tasoagc.dev/c1pD" alt="Material-UI logo">
 </p>
 <h1 align="center">Project Error Utilities</h1>
 
