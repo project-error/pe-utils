@@ -4,11 +4,16 @@ on:
     branches:
       - develop
 jobs:
-  build_docs:
+  "build_docs":
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Get reference hash
+        id: vars
+        run: |
+          echo "::set-output name=commit_hash::$(git rev-parse --short HEAD)"
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
@@ -32,7 +37,7 @@ jobs:
       - name: Deploy gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
+          npm run deploy -- -u "pe-actions-bot <actions@github.com>" -m "Deploy new docs - based on ${{ steps.vars.outputs.commit_hash }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: true
