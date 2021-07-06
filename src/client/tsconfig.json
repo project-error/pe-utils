@@ -7,4 +7,8 @@
   },
   "extends": "../../tsconfig.json",
   "include": ["./**/*"],
+  "typedocOptions": {
+    "entryPoints": ["index.ts"],
+    "out": "../../docs"
+  }
 }

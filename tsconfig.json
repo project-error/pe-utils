@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "./lib",
-    "types": [],
     "strict": true,
     "module": "commonjs",
     "declaration": true,
@@ -11,8 +10,22 @@
     "lib": ["es2017", "DOM"],
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
-  "include": ["src/**/*"],
+  "references": [
+    {
+      "path": "src/client"
+    },
+    {
+      "path": "src/server"
+    },
+    {
+      "path": "src/misc"
+    },
+    {
+      "path": "src/types"
+    }
+  ],
+  "files": [],
   "exclude": ["node_modules"]
 }
