@@ -1,15 +1,14 @@
-name: Main CI
-
-on: [push]
+name: Deploy Docs
+on:
+  push:
+    branches:
+      - develop
 jobs:
-  build_test:
+  build_docs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
@@ -26,18 +25,14 @@ jobs:
           node-version: '14.x'
       - name: Install dependencies
         run: yarn --frozen-lockfile
-      - name: Build all
-        run: npm run build:all
-      - name: Commit files
+      - name: Build Docs
+        run: npm run docs:build
+      - name: Inject CName into Build
+        run: echo utils.projecterror.dev > ./docs/CNAME
+      - name: Deploy gh-pages
         run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Updated documentation " -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "gh-pages"
-
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: true
