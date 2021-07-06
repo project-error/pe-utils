@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "npm:publish": "npm run clean && npm run build:all && npm publish",
-    "build": "tsc -b",
+    "build": "npm run clean && tsc -b",
     "deploy": "gh-pages -d docs",
     "docs:build": "rimraf docs && npx typedoc --options typedoc_config.json"
   },
