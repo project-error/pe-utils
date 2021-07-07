@@ -1,4 +1,5 @@
 {
   "entryPoints": ["src/client/index.ts", "src/server/index.ts", "src/misc/index.ts", "src/types/index.ts"],
-  "out": "docs"
+  "out": "docs",
+  "excludePrivate": "true"
 }
