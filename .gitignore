@@ -1,5 +1,9 @@
 .idea
 .vscode
+.docs
+
+# tests
+coverage
 
 lib
 
