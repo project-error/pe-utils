@@ -12,7 +12,7 @@ type ColorToCodeMap = {
   [key in LogLevelName]: ColorCodeString
 }
 
-export class ClientLogger {
+class ClientLogger {
   private readonly _settings: ClientLoggerSettings = {
     minLevel: "debug",
     prefix: undefined,
@@ -90,3 +90,5 @@ export class ClientLogger {
    console.log(logOutString, ...logArguments)
   }
 }
+
+export default ClientLogger

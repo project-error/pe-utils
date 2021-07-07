@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { ClientUtilSettings, ClientUtilsParams, NuiCallbackFunc, RPCListenerCb } from "../types";
 
 
-export class ClientUtils {
+class ClientUtils {
   private _settings: ClientUtilSettings = {
     promiseTimeout: 15000,
     debugMode: false,
@@ -103,3 +103,5 @@ export class ClientUtils {
     });
   }
 }
+
+export default ClientUtils
