@@ -30,6 +30,8 @@ jobs:
           node-version: '14.x'
       - name: Install dependencies
         run: yarn --frozen-lockfile
+      - name: Run Tests
+        run: yarn test
       - name: Build Docs
         run: npm run docs:build
       - name: Inject CName into Build
