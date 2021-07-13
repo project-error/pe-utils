@@ -86,8 +86,7 @@ RegisterNuiCB('someCallbackEvent', async (data: unknown, cb: (any) => void) => {
 
 ```ts
 // Server Side
-import { ServerUtils } from "./sv_utils";
-import { ServerPromiseResp } from "./sv_utils.types";
+import { ServerUtils, ServerPromiseResp } from "@project-error/pe-utils";
 
 interface IncomingData {
   thing1: string;
