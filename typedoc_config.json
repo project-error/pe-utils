@@ -1,4 +1,0 @@
-{
-  "entryPoints": ["../src/client/index.ts", "../src/server/index.ts"],
-  "out": "./"
-}
