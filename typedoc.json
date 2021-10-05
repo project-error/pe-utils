@@ -1,4 +1,4 @@
 {
-  "entryPoints": ["../src/client/index.ts", "../src/server/index.ts", "../src/misc/index.ts"],
-  "out": "./"
+  "entryPoints": ["./src/client/index.ts", "./src/server/index.ts", "./src/misc/index.ts"],
+  "out": "./docs"
 }

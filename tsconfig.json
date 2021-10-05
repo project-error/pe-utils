@@ -8,24 +8,11 @@
     "target": "es6",
     "allowJs": true,
     "lib": ["es2017", "DOM"],
-    "moduleResolution": "node",
+    "noEmitOnError": false,
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "rootDir": "src"
   },
-  "references": [
-    {
-      "path": "src/client"
-    },
-    {
-      "path": "src/server"
-    },
-    {
-      "path": "src/misc"
-    },
-    {
-      "path": "src/types"
-    }
-  ],
-  "files": [],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }
