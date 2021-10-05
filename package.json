@@ -1,6 +1,6 @@
 {
   "name": "@project-error/pe-utils",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A collection of v8 specific FiveM utilities",
   "main": "lib/index.js",
   "scripts": {
