@@ -1,6 +1,15 @@
-import { v4 as uuidv4 } from "uuid";
 import { ClientUtilSettings, ClientUtilsParams, NuiCallbackFunc, RPCListenerCb } from "../types";
 
+/**
+ * Returns a Universal Unique identifier
+ * @returns string
+ */
+function uuidv4(): string {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
 
 export class ClientUtils {
   private _settings: ClientUtilSettings = {
