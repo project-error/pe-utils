@@ -2,16 +2,17 @@
   "compilerOptions": {
     "outDir": "./lib",
     "strict": true,
-    "module": "commonjs",
+    "module": "esnext",
     "declaration": true,
     "sourceMap": true,
-    "target": "es6",
+    "target": "es2017",
     "allowJs": true,
     "lib": ["es2017", "DOM"],
     "noEmitOnError": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "moduleResolution": "node"
   },
   "include": ["src"],
   "exclude": ["node_modules"]
