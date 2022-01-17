@@ -1,14 +1,12 @@
 import { ServerErrorCodes, ServerStatus } from "../misc";
-import { v4 as uuidv4 } from "uuid";
 
 import {
   CBSignature,
   PromiseEventResp,
   PromiseRequest,
   ServerPromiseResp,
-  ServerUtilSettings
+  ServerUtilSettings,
 } from "../types";
-
 
 export class ServerUtils {
   private readonly _utilSettings: ServerUtilSettings = {
@@ -55,6 +53,17 @@ export class ServerUtils {
       });
     });
   }
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  private uuidV4(options?: any, buf?: any, offset?: any): string {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+      const r = (Math.random() * 16) | 0,
+        v = c == "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+
   /**
    * For calling RPC events registered on the client. RPC events will trigger on the client and
    * return client data which is dependent on the logic of the RPC callback.
@@ -75,7 +84,7 @@ export class ServerUtils {
         rej(`RPC Call: ${eventName} timed out after ${this._utilSettings.rpcTimeout} `);
       }, this._utilSettings.rpcTimeout);
 
-      const uniqId = uuidv4();
+      const uniqId = this.uuidV4();
 
       const listenEventName = `${eventName}:${uniqId}`;
 
