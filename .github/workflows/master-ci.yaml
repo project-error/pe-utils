@@ -23,6 +23,6 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Build all
-        run: yarn build:all
+        run: yarn build
         env:
           CI: true
