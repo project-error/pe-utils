@@ -7,7 +7,5 @@
  * @return {*}  {string} uuid string
  */
 export function PrefixedUUID(iterator: number): string {
-  return `${iterator.toString(36)}-${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(
-    36
-  )}`;
+  return `${iterator.toString(36)}-${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(36)}`;
 }

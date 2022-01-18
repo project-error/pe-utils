@@ -1,4 +1,4 @@
-import { LogLevelName } from "../types";
+import { LogLevelName } from "../common/types";
 
 interface ClientLoggerSettings {
   minLevel: LogLevelName;
@@ -29,15 +29,7 @@ export class ClientLogger {
     silly: "^5",
   };
 
-  private readonly _logLevels: LogLevelName[] = [
-    "silly",
-    "trace",
-    "debug",
-    "info",
-    "warn",
-    "error",
-    "fatal",
-  ];
+  private readonly _logLevels: LogLevelName[] = ["silly", "trace", "debug", "info", "warn", "error", "fatal"];
 
   public constructor(settings?: Partial<ClientLoggerSettings>) {
     this._settings = { ...this._settings, ...settings };

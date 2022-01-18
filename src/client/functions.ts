@@ -1,4 +1,4 @@
-import { NuiCallbackFunc } from "../types";
+import { NuiCallbackFunc } from "../common/types";
 
 type CallbackFn<T> = (data: T, cb: NuiCallbackFunc) => void;
 
@@ -7,7 +7,7 @@ type CallbackFn<T> = (data: T, cb: NuiCallbackFunc) => void;
  *  @param event - The event name to listen for
  *  @param callback - The callback function
  */
-export const RegisterNuiCB = <T = any>(event: string, callback: CallbackFn<T>): void => {
+export const RegisterNuiCB = <T = unknown>(event: string, callback: CallbackFn<T>): void => {
   RegisterNuiCallbackType(event);
   on(`__cfx_nui:${event}`, callback);
 };

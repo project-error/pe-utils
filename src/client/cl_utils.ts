@@ -1,5 +1,5 @@
-import { PrefixedUUID } from "src/misc";
-import { ClientUtilSettings, ClientUtilsParams, NuiCallbackFunc, RPCListenerCb } from "../types";
+import { PrefixedUUID } from "../common/helpers";
+import { ClientUtilSettings, ClientUtilsParams, NuiCallbackFunc, RPCListenerCb } from "../common/types";
 
 export class ClientUtils {
   private uidCounter = 0;
@@ -93,11 +93,11 @@ export class ClientUtils {
       this.debugLog(`RPC called: ${eventName}`);
 
       Promise.resolve(cb(data))
-        .then((retData) => {
+        .then(retData => {
           this.debugLog(`RPC Data:`, data);
           emitNet(listenEventName, retData);
         })
-        .catch((e) => {
+        .catch(e => {
           console.error(`RPC Error in ${eventName}, ERR: ${e.message}`);
         });
     });

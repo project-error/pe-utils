@@ -1,12 +1,13 @@
-import { ServerErrorCodes, ServerStatus, PrefixedUUID } from "../misc";
-
+import { PrefixedUUID } from "../common/helpers";
 import {
   CBSignature,
   PromiseEventResp,
   PromiseRequest,
   ServerPromiseResp,
   ServerUtilSettings,
-} from "../types";
+  ServerErrorCodes,
+  ServerStatus,
+} from "../common/types";
 
 export class ServerUtils {
   private uidCounter = 0;
@@ -47,7 +48,7 @@ export class ServerUtils {
         emitNet(respEventName, src, data);
       };
 
-      Promise.resolve(cb(promiseRequest, promiseResp)).catch((e) => {
+      Promise.resolve(cb(promiseRequest, promiseResp)).catch(e => {
         console.error(`Error in onNetPromise (${eventName}), ERROR: ${e.message}`);
 
         promiseResp({ status: ServerStatus.Error, errorMsg: ServerErrorCodes.UnknownError });
@@ -62,11 +63,7 @@ export class ServerUtils {
    * @param src The source of the player to call the RPC event on
    * @param data Any data you wish to pass to the client during this RPC request
    **/
-  public callClientRPC<T = any>(
-    eventName: string,
-    src: number | string,
-    data?: unknown
-  ): Promise<T> {
+  public callClientRPC<T = any>(eventName: string, src: number | string, data?: unknown): Promise<T> {
     return new Promise((res, rej) => {
       let hasTimedout = false;
 
