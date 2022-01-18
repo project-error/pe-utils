@@ -1,4 +1,4 @@
-import { ServerErrorCodes, ServerStatus } from "../misc";
+import { ServerErrorCodes, ServerStatus, PrefixedUUID } from "../misc";
 
 import {
   CBSignature,
@@ -75,9 +75,7 @@ export class ServerUtils {
         rej(`RPC Call: ${eventName} timed out after ${this._utilSettings.rpcTimeout} `);
       }, this._utilSettings.rpcTimeout);
 
-      const uniqId = `${(this.uidCounter++).toString(36)}-${Math.floor(
-        Math.random() * Number.MAX_SAFE_INTEGER
-      ).toString(36)}`;
+      const uniqId = PrefixedUUID(this.uidCounter++);
 
       const listenEventName = `${eventName}:${uniqId}`;
 

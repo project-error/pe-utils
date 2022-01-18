@@ -1,8 +1,8 @@
-import { uuidV4 } from "./functions";
+import { PrefixedUUID } from "src/misc";
 import { ClientUtilSettings, ClientUtilsParams, NuiCallbackFunc, RPCListenerCb } from "../types";
 
-
 export class ClientUtils {
+  private uidCounter = 0;
   private _settings: ClientUtilSettings = {
     promiseTimeout: 15000,
     debugMode: false,
@@ -44,7 +44,7 @@ export class ClientUtils {
         reject(`${eventName} has timed out after ${this._settings.promiseTimeout} ms`);
       }, this._settings.promiseTimeout);
 
-      const uniqId = uuidV4();
+      const uniqId = PrefixedUUID(this.uidCounter++);
 
       const listenEventName = `${eventName}:${uniqId}`;
 
