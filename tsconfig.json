@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./lib",
     "strict": true,
     "module": "esnext",
@@ -7,13 +8,16 @@
     "sourceMap": true,
     "target": "es2017",
     "allowJs": true,
-    "lib": ["es2017", "DOM"],
+    "lib": ["es2017"],
     "noEmitOnError": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "rootDir": "src",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "noEmit": false
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["./src/**/*.*"],
+  "exclude": ["**/node_modules"]
 }

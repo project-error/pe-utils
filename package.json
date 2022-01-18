@@ -5,10 +5,10 @@
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
-    "npm:publish": "npm run clean && npm run build:all && npm publish",
+    "npm:publish": "yarn build:all && yarn publish",
     "build:client": "tsc -p src/client/tsconfig.json",
     "build:server": "tsc -p src/server/tsconfig.json",
-    "build:all": "npm run build:client && npm run build:server",
+    "build:all": "yarn clean && yarn build:client && yarn build:server",
     "dev:client": "tsc -p src/client/tsconfig.json --watch",
     "dev:server": "tsc -p src/server/tsconfig.json --watch",
     "dev:all": "run-p dev:client dev:server"
