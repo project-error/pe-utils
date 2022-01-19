@@ -1,14 +1,14 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "lib": ["es2017", "DOM"],
-    "types": ["@citizenfx/client", "@types/node"],
-    "moduleResolution": "node",
-  },
   "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2017", "dom"],
+    "types": ["@citizenfx/client", "@types/node"],
+    "composite": true
+  },
   "include": ["./**/*"],
-  "typedocOptions": {
-    "entryPoints": ["index.ts"],
-    "out": "../../docs"
-  }
+  "references": [
+    {
+      "path": "../common/tsconfig.json"
+    }
+  ]
 }

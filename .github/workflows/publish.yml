@@ -18,16 +18,16 @@ jobs:
       - name: "Setup Node.js"
         uses: "actions/setup-node@v1"
         with:
-          node-version: 14
+          node-version: 12
       - name: "Automated Version Bump"
         id: version-bump
         uses: "phips28/gh-action-bump-version@master"
         with:
-          tag-prefix: 'v'
+          tag-prefix: "v"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'Output Step'
+      - name: "Output Step"
         env:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
@@ -62,9 +62,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: 10
+          node-version-file: ".nvmrc"
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
@@ -76,14 +76,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version-file: ".nvmrc"
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - uses: JS-DevTools/npm-publish@v1
         with:
           dry-run: true
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-

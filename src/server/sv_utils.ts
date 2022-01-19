@@ -1,16 +1,16 @@
-import { ServerErrorCodes, ServerStatus } from "../misc";
-import { v4 as uuidv4 } from "uuid";
-
+import { PrefixedUUID } from "../common/helpers";
 import {
-  CBSignature,
+  NetPromiseCallback,
   PromiseEventResp,
   PromiseRequest,
+  ServerErrorCodes,
   ServerPromiseResp,
-  ServerUtilSettings
-} from "../types";
-
+  ServerStatus,
+  ServerUtilSettings,
+} from "./types";
 
 export class ServerUtils {
+  private uidCounter = 0;
   private readonly _utilSettings: ServerUtilSettings = {
     debugMode: false,
     rpcTimeout: 10000,
@@ -27,10 +27,12 @@ export class ServerUtils {
 
   /**
    * The method used whenever handling a promisified event sent by the Client Utils instance
+   * @typeParam T Request data type
+   * @typeParam P Response data type
    * @param eventName The event name to listen for
-   * @param cb A callback function that takes the req and resp objects as its arguments
+   * @param callback A callback function which provides the request and response data to the caller
    **/
-  public onNetPromise<T = any, P = any>(eventName: string, cb: CBSignature<T, P>): void {
+  public onNetPromise<T = any, P = any>(eventName: string, callback: NetPromiseCallback<T, P>): void {
     onNet(eventName, (respEventName: string, data: T) => {
       const src = global.source;
 
@@ -48,34 +50,32 @@ export class ServerUtils {
         emitNet(respEventName, src, data);
       };
 
-      Promise.resolve(cb(promiseRequest, promiseResp)).catch((e) => {
+      Promise.resolve(callback(promiseRequest, promiseResp)).catch((e: Error) => {
         console.error(`Error in onNetPromise (${eventName}), ERROR: ${e.message}`);
 
         promiseResp({ status: ServerStatus.Error, errorMsg: ServerErrorCodes.UnknownError });
       });
     });
   }
+
   /**
    * For calling RPC events registered on the client. RPC events will trigger on the client and
    * return client data which is dependent on the logic of the RPC callback.
-   * @param eventName The event name to trigger
+   * @typeParam T The return data type of the RPC callback
+   * @param eventName The RPC name to call
    * @param src The source of the player to call the RPC event on
-   * @param data Any data you wish to pass to the client during this RPC request
+   * @param data Optional data to pass to the client through the RPC callback
    **/
-  public callClientRPC<T = any>(
-    eventName: string,
-    src: number | string,
-    data?: unknown
-  ): Promise<T> {
-    return new Promise((res, rej) => {
+  public callClientRPC<T = any>(eventName: string, src: number | string, data?: unknown): Promise<T> {
+    return new Promise((resolve, reject) => {
       let hasTimedout = false;
 
       setTimeout(() => {
         hasTimedout = true;
-        rej(`RPC Call: ${eventName} timed out after ${this._utilSettings.rpcTimeout} `);
+        reject(`RPC Call: ${eventName} timed out after ${this._utilSettings.rpcTimeout}`);
       }, this._utilSettings.rpcTimeout);
 
-      const uniqId = uuidv4();
+      const uniqId = PrefixedUUID(this.uidCounter++);
 
       const listenEventName = `${eventName}:${uniqId}`;
 
@@ -84,7 +84,7 @@ export class ServerUtils {
       const handleClientResp = (data: T) => {
         removeEventListener(listenEventName, handleClientResp);
         if (hasTimedout) return;
-        res(data);
+        resolve(data);
       };
 
       onNet(listenEventName, handleClientResp);

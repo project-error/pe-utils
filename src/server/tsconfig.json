@@ -1,15 +1,13 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "lib": ["es2017"],
-    "types": ["@citizenfx/server", "@types/node"]
-  },
   "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["@citizenfx/server", "@types/node"],
+    "composite": true
+  },
   "include": ["./**/*"],
-  "typedocOptions": {
-    "entryPoints": [
-      "index.ts"
-    ],
-    "out": "../../docs"
-  }
+  "references": [
+    {
+      "path": "../common/tsconfig.json"
+    }
+  ]
 }

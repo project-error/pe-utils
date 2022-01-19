@@ -17,9 +17,7 @@
       "labels": ["tweak"]
     }
   ],
-  "ignore_labels": [
-    "ignore"
-  ],
+  "ignore_labels": ["ignore"],
   "sort": "ASC",
   "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",
   "pr_template": "- ${{TITLE}}\n   - PR: #${{NUMBER}}",
@@ -45,13 +43,9 @@
   "max_tags_to_fetch": 200,
   "max_pull_requests": 200,
   "max_back_track_time_days": 365,
-  "exclude_merge_branches": [
-    "Owner/qa"
-  ],
+  "exclude_merge_branches": ["Owner/qa"],
   "tag_resolver": {
     "method": "semver"
   },
-  "base_branches": [
-    "master"
-  ]
+  "base_branches": ["master"]
 }
