@@ -50,7 +50,7 @@ export class ServerUtils {
         emitNet(respEventName, src, data);
       };
 
-      Promise.resolve(callback(promiseRequest, promiseResp)).catch(e => {
+      Promise.resolve(callback(promiseRequest, promiseResp)).catch((e: Error) => {
         console.error(`Error in onNetPromise (${eventName}), ERROR: ${e.message}`);
 
         promiseResp({ status: ServerStatus.Error, errorMsg: ServerErrorCodes.UnknownError });

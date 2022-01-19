@@ -1,6 +1,6 @@
 /**
  * Returns a uuid, prefixed by an iterator number, for added randomness.
- * Example: 7-2ammqh9cevf
+ * Example: `7-2ammqh9cevf`
  *
  * @param iterator Iterator value to prefix the uuid with
  * @returns UUID string
