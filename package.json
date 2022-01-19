@@ -1,6 +1,6 @@
 {
   "name": "@project-error/pe-utils",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "A collection of v8 specific FiveM utilities",
   "main": "lib/index.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "build": "yarn clean && tsc --build src/tsconfig.json",
     "dev": "yarn clean && tsc --build src/tsconfig.json --watch",
     "docs:gen": "typedoc",
-    "docs:server": "http-server docs"
+    "docs:server": "http-server docs",
+    "semantic-release": "semantic-release"
   },
   "files": [
     "lib/**/*"
@@ -40,11 +41,15 @@
     "prettier": "2.5.1",
     "rimraf": "3.0.2",
     "typedoc": "0.22.11",
-    "typescript": "4.5.4"
+    "typescript": "4.5.4",
+    "semantic-release": "^19.0.2"
+  },
+  "release": {
+    "branches": ["master", "next"]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/project-error/pe-utils.git"
+    "url": "https://github.com/project-error/pe-utils.git"
   },
   "bugs": {
     "url": "https://github.com/project-error/pe-utils/issues"
