@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "include": ["index.ts"],
   "typedocOptions": {
-    "entryPoints": ["./server/index.ts", "./client/index.ts", "./common/helpers.ts", "./common/types.ts"]
+    "entryPoints": ["./server/index.ts", "./client/index.ts", "./common/helpers.ts"]
   },
   "references": [
     {

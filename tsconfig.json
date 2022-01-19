@@ -18,6 +18,6 @@
     "noImplicitAny": false,
     "noEmit": false
   },
-  "include": ["./src/**/*.*"],
+  "include": ["./src/**/*.*", "src/server"],
   "exclude": ["**/node_modules"]
 }

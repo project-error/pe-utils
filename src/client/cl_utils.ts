@@ -1,5 +1,5 @@
 import { PrefixedUUID } from "../common/helpers";
-import { ClientUtilSettings, ClientUtilsParams, NuiCallbackFunc, RPCListenerCb } from "../common/types";
+import { ClientUtilSettings, ClientUtilsParams, NuiCallbackFunc, RPCListenerCb } from "./types";
 
 export class ClientUtils {
   private uidCounter = 0;

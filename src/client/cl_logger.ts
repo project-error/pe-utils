@@ -1,4 +1,4 @@
-import { LogLevelName } from "../common/types";
+import { LogLevelName } from "./types";
 
 interface ClientLoggerSettings {
   minLevel: LogLevelName;
