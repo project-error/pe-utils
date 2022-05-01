@@ -64,7 +64,7 @@ raised.
 
 ```ts
 // Client Side
-import { ClientUtils, RegisterNuiCB, PromiseEventResp } from "@project-error/pe-utils";
+import { ClientUtils, RegisterNuiCB, ServerPromiseResp } from "@project-error/pe-utils";
 
 interface ServerResponseData {
   data1: number;
@@ -77,7 +77,7 @@ const clUtils = new ClientUtils();
 // NUI Callback wrapped for v8
 RegisterNuiCB("someCallbackEvent", async (data: unknown, cb: (any) => void) => {
   try {
-    const serverResp = await clUtils.emitNetPromise<PromiseEventResp<ServerResponseData>>("fetchEvent");
+    const serverResp = await clUtils.emitNetPromise<ServerPromiseResp<ServerResponseData>>("fetchEvent");
     cb(serverResp);
   } catch (e) {
     console.error(`Error encountered: ${e.message}`);
@@ -87,8 +87,7 @@ RegisterNuiCB("someCallbackEvent", async (data: unknown, cb: (any) => void) => {
 
 ```ts
 // Server Side
-import { ServerUtils } from "./sv_utils";
-import { ServerPromiseResp } from "./sv_utils.types";
+import { ServerUtils, ServerPromiseResp } from "@project-error/pe-utils";
 
 interface IncomingData {
   thing1: string;
@@ -102,7 +101,7 @@ interface ReturnData {
 
 const svUtils = new ServerUtils();
 
-svUtils.onNetPromise<RequestData, ServerPromiseResp<ReturnData>>("fetchEvent", (req, resp) => {
+svUtils.onNetPromise<RequestData, ReturnData>("fetchEvent", (req, resp) => {
   const playerSrc = req.source;
 
   // Do some logic to get resp data on the server
